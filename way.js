@@ -761,6 +761,23 @@
 
 	}
 
+	WAY.prototype.unshift = function(selector, value, options) {
+
+		if (!selector) { return false; }
+
+		var self = this;
+		options = options || {};
+
+		if (selector) {
+			self.data = selector ? _json.unshift(self.data, selector, value, true) : {};
+		}
+
+		self.updateDependencies(selector);
+		self.emitChange(selector, null);
+		if (options.persistent) { self.backup(selector); }
+
+    }
+
 	WAY.prototype.remove = function(selector, options) {
 
 		var self = this;
