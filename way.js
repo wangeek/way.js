@@ -495,6 +495,8 @@
 
 			repeat.filter = repeat.filter || [];
 			w.dom(wrapper).empty();
+			
+			var len = data && data.length || 0;
 
 			for (var key in data) {
 
@@ -513,6 +515,8 @@
 				w.dom(repeat.element).attr(tagPrefix + "-scope", key);
 				var html = w.dom(repeat.element).get(0).outerHTML;
 				html = html.replace(/\$\$key/gi, key);
+				// add reverse key
+				html = html.replace(/\$\$revkey/gi, len-key);
 				items.push(html);
 
 			}
